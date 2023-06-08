@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+  <h1>{{ object.title }}</h1>
+  {% for definition in definitions %}
+    <h2>Definition</h2>
+    <p>{{ definition.text }}</p>
+    {% if definition.image %}
+      <img src="{{ definition.image.url }}" alt="{{ definition.text }}">
+    {% endif %}
+  {% empty %}
+    <p>No definitions found.</p>
+  {% endfor %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+  <h1>Words</h1>
+  <form method="get" action="{% url 'dictionary:word_search' %}">
+    <input type="text" name="q" value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+    {% for word in object_list %}
+      <li>
+        <a href="{% url 'dictionary:word_detail' pk=word.pk %}">{{ word.title }}</a>
+        <a href="{% url 'dictionary:word_update' pk=word.pk %}">(edit)</a>
+        <a href="{% url 'dictionary:word_delete' pk=word.pk %}">(delete)</a>
+      </li>
+    {% empty %}
+      <li>No words found.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'dictionary:word_create' %}">Add word</a>
+{% endblock %}
+</body>
+</html>
